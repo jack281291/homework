@@ -1,0 +1,18 @@
+education,edu_year
+Children,0
+Less than 1st grade,0.5
+1st 2nd 3rd or 4th grade,2.5
+5th or 6th grade,5.5
+7th and 8th grade,7.5
+9th grade,9
+10th grade,10
+11th grade,11
+12th grade no diploma,12
+High school graduate,12
+Some college but no degree,14
+Associates degree-academic program,14
+Associates degree-occup /vocational,14
+Bachelors degree(BA AB BS),16
+Masters degree(MA MS MEng MEd MSW MBA),18
+Prof school degree (MD DDS DVM LLB JD),20
+Doctorate degree(PhD EdD),21
