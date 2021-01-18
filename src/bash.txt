@@ -1,0 +1,6 @@
+wget http://archive.ics.uci.edu/ml/machine-learning-databases/bridges/bridges.data.version1 
+echo IDENTIF,RIVER,LOCATION,ERECTED,PURPOSE,LENGTH,LANES,CLEAR-G,T-OR-D,MATERIAL,SPAN,REL-L,TYPE | cat - bridges.data.version1 >> bridges.data.version2
+awk 'BEGIN{ FS =","}; NR>1{print $5};' < bridges.data.version2 | uniq -c
+awk 'BEGIN{ FS =","}; NR>1{print $6};' < bridges.data.version2 | uniq -c
+awk -F "," '{ if($6 > 1000) { print NR} }' bridges.data.version1 | tail -1
+sed -i -e 's/?/0/g' bridges.data.version2
