@@ -1,1 +1,1 @@
-# You can find in nbs the notebooks for the Q1 Pyspark assessment, in data the data for Q1, in src the script for Q2 (churn.sql) and Q3 (myscript.sh) and a .txt with all the single commands for Q3 except the script
+#### You can find in nbs the notebooks for the Q1 Pyspark assessment, in data the data for Q1, in src the script for Q2 (churn.sql) and Q3 (myscript.sh) and a command_bash.txt with all the single commands for Q3 except the script
