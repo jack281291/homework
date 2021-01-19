@@ -20,13 +20,18 @@ order by date_now;
 create table transactions_1 as select distinct t.*, t2.* from transactions_0 t left join transactions t2
 on t.user_id = t2.user_id where t.date_now >= t2.date;
 
-select count(user_id) as n_user, date_now, status from (select t.*,
-       (case when date_now = min(date) over (partition by user_id)
+create table user_date as select user_id, date_now, max(date) as max_date, min(date) as min_date
+from transactions_1 group by user_id, date_now
+
+create table user_date_status as select t.*,
+       (case when date_now = min_date and date_now = max_date
              then 'New'
-             when date_now < date(lag(date) over (partition by user_id order by date), "+28 Days")
+             when date_now <= date(max_date, "+28 Days")
              then 'Active'
-             when date_now < date(lead(date) over (partition by user_id order by date),  "-28 Days")
-             then 'Churned'
-             else 'Reactivated'
-        end) as status
-from transactions_1 t) group by date_now, status
+             when date_now > date(max_date,  "+28 Days")
+             then 'Churned' ELSE 'Error' end) as status
+             from user_date t
+
+select count(user_id) as n_user, date_now, status_final as status from (select *, (case when status = "Active" and lag(status) over ( 
+		PARTITION BY user_id
+		ORDER BY date_now asc) = "Churned" then "Reactivated" else status END) as status_final from user_date_status) group by date_now, status_final
